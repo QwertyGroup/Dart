@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": true,
+		"dart.flutterCreateAndroidLanguage": "kotlin",
+		"dart.flutterCreateIOSLanguage": "swift",
+		"dart.previewFlutterUiGuides": true,
+		"dart.previewFlutterUiGuidesCustomTracking": true,
+		"dart.previewFlutterOutline": true
+	}
+}
