@@ -1,0 +1,4 @@
+#Sat Aug 24 14:05:31 EEST 2019
+base.0=C\:\\Users\\beeff\\Desktop\\CrystalFactory\\Dart\\Flutter-Story-App-UI\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
