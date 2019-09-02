@@ -1,4 +1,22 @@
 main() async {
+  futures();
+  runGenerators();
+}
+
+futures() {
+  Future<int>.delayed(
+    Duration(seconds: 2),
+    () {
+      return 123;
+    },
+  ).then((value) {
+    print(value);
+  });
+
+  Future.value(222).then(print);
+}
+
+runGenerators() async {
   var gen = Gen();
   for (var i in gen()) {
     print(i);

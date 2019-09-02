@@ -6,6 +6,7 @@ import 'package:exploring/styling.dart';
 import 'package:meta/meta.dart';
 import 'package:exploring/myspace.dart' as myspace;
 import 'package:exploring/futures.dart' as futures;
+import 'package:exploring/streams.dart' as streams;
 
 main(List<String> arguments) {
   print('Hello world: ${exploring.calculate()}!');
@@ -57,6 +58,8 @@ main(List<String> arguments) {
   myspace.main();
   print('${'*' * 8} futures ${'*' * 8}');
   futures.main();
+  print('${'*' * 8} streams ${'*' * 8}');
+  streams.main();
 }
 
 const a1 = [1, 2, 3];
