@@ -54,14 +54,21 @@ class _MyHomePage5State extends State<MyHomePage5> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CupertinoButton(
+                    CupertinoButton.filled(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 1,
+                        horizontal: 20,
+                      ),
                       child: Text(
                         "increment",
-                        textScaleFactor: 2,
+                        textScaleFactor: 1.8,
                       ),
                       onPressed: _switch
                           ? () => bloc.dispatch(CounterEvent.increment)
                           : null,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(2),
                     ),
                     CupertinoSwitch(
                       value: _switch,
@@ -74,12 +81,11 @@ class _MyHomePage5State extends State<MyHomePage5> {
                     ),
                   ],
                 ),
-                CupertinoButton.filled(
+                CupertinoButton(
                   child: Text(
                     'decrement',
-                    textScaleFactor: 1.2,
+                    textScaleFactor: 1.5,
                   ),
-                  borderRadius: BorderRadius.circular(8),
                   onPressed: () => bloc.dispatch(CounterEvent.decrement),
                 )
               ],
