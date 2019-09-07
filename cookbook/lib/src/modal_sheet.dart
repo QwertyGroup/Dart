@@ -168,47 +168,54 @@ class _ModalSheetState extends State<ModalSheet> with TickerProviderStateMixin {
                   ),
                   ...List.generate(
                     2,
-                    (_) => Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        ...List.generate(
-                          6,
-                          (_) => Row(
-                            children: <Widget>[
-                              Transform.rotate(
-                                angle: -12 * pi / 180,
-                                child: Text(
-                                  'BM',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: CupertinoColors.black,
+                    (_) => SizedBox(
+                      height: 12,
+                      width: double.infinity,
+                      child: FittedBox(
+                        fit: BoxFit.none,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ...List.generate(
+                              5, // 6
+                              (_) => Row(
+                                children: <Widget>[
+                                  Transform.rotate(
+                                    angle: -12 * pi / 180,
+                                    child: Text(
+                                      'BM',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        color: CupertinoColors.black,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Text(
-                                'BM',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: CupertinoColors.black,
-                                ),
-                              ),
-                              Transform.rotate(
-                                angle: 12 * pi / 180,
-                                child: Text(
-                                  'BM',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: CupertinoColors.black,
+                                  Text(
+                                    'BM',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: CupertinoColors.black,
+                                    ),
                                   ),
-                                ),
+                                  Transform.rotate(
+                                    angle: 12 * pi / 180,
+                                    child: Text(
+                                      'BM',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        color: CupertinoColors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
