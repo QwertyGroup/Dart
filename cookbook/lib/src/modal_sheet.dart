@@ -10,18 +10,31 @@ class ModalSheet extends StatefulWidget {
   _ModalSheetState createState() => _ModalSheetState();
 }
 
-class _ModalSheetState extends State<ModalSheet> {
+class _ModalSheetState extends State<ModalSheet> with TickerProviderStateMixin {
   String _selectedItem = '';
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 10),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    // _controller.reset();
+    _controller.repeat(reverse: false); // ln: 114
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: CircleBorder(
-            side: BorderSide(
-          color: Theme.of(context).canvasColor,
-          width: 0,
-        )),
+          side: BorderSide(
+            color: Theme.of(context).canvasColor,
+            width: 0,
+          ),
+        ),
         elevation: 0,
         child: Icon(
           Icons.wrap_text,
@@ -98,19 +111,45 @@ class _ModalSheetState extends State<ModalSheet> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Transform.translate(
-                          offset: Offset(17, -6),
-                          child: Icon(
-                            Icons.settings,
-                            size: 76,
-                            color: Colors.black,
+                          offset: Offset(19, -9.0), // ln: 29
+                          child: Transform.rotate(
+                            angle: 4.8 / 180 * pi,
+                            child: RotationTransition(
+                              turns: Tween<double>(
+                                begin: 0,
+                                end: 2,
+                              ).animate(
+                                CurvedAnimation(
+                                  curve: Curves.easeInOutBack,
+                                  parent: _controller,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.settings,
+                                size: 76,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                         ),
                         Transform.rotate(
-                          angle: 43 / 180 * pi,
-                          child: Icon(
-                            Icons.settings,
-                            size: 76,
-                            color: Colors.black,
+                          angle: 44 / 180 * pi,
+                          child: RotationTransition(
+                            turns: Tween<double>(
+                              begin: 2,
+                              end: 0,
+                            ).animate(
+                              CurvedAnimation(
+                                curve: Curves.easeInOutBack,
+                                // reverseCurve: Curves.easeInOut,
+                                parent: _controller,
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.settings,
+                              size: 76,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                         Transform.translate(
