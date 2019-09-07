@@ -1,5 +1,9 @@
+import 'dart:math';
+
+import 'package:cookbook/src/cf_identity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cookbook/src/cf_identity.dart';
 
 class ModalSheet extends StatefulWidget {
   @override
@@ -21,35 +25,69 @@ class _ModalSheetState extends State<ModalSheet> {
         elevation: 0,
         child: Icon(
           Icons.wrap_text,
+          // CFIdentity.fff_circs,
         ),
         backgroundColor: Colors.black,
         onPressed: _onButtonPressed,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         // clipBehavior: Clip.hardEdge,
         color: Colors.black,
         child: Container(
-          height: 36,
+          height: 40,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 4),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(
+                    CFIdentity.cflogo_row,
+                    size: 30,
+                    color: Theme.of(context).canvasColor,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(
+                    CFIdentity.fff_orsen,
+                    size: 30,
+                    color: Theme.of(context).canvasColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // RaisedButton(
-            //   child: Text('Show'),
-            //   onPressed: _onButtonPressed,
-            // ),
-            Text(
-              _selectedItem,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 70,
-                color: CupertinoColors.black,
-              ),
-            )
+            // if (_selectedItem == 'Crystal\nFactory') ...[
+            //   Icon(CFIdentity.fff_circs)
+            // ],
+            if (_selectedItem == 'cf')
+              Icon(
+                CFIdentity.fff_circs,
+                size: 200,
+              )
+            else
+              Text(
+                _selectedItem,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 70,
+                  color: CupertinoColors.black,
+                ),
+              )
           ],
         ),
       ),
@@ -208,6 +246,33 @@ class _ModalSheetState extends State<ModalSheet> {
                         ],
                       ),
                       onTap: () => _selectItem('BM'),
+                    ),
+                    ListTile(
+                      // leading: Icon(Icons.assessment, color: Colors.black),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Transform.translate(
+                            offset: Offset(-7, 0),
+                            // angle: pi / 4,
+                            // alignment: Alignment.centerLeft,
+                            child: Icon(
+                              CFIdentity.cflogo_cell,
+                              color: Colors.black,
+                              size: 18,
+                            ),
+                          ),
+                          Transform.translate(
+                            offset: Offset(-7, 0),
+                            child: Text(
+                              'Crystal',
+                              textAlign: TextAlign.start,
+                              style: style,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: () => _selectItem('cf'),
                     ),
                   ],
                 ),
