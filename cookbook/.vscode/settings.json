@@ -1,0 +1,18 @@
+{
+    // "workbench.colorTheme": "Material Theme Darker",
+    // "editor.fontFamily": "Fira Code",
+    // "workbench.colorCustomizations": {
+    //     "[Material Theme Darker]": {
+    //         "statusBar.debuggingBackground": "#212121"
+    //     }
+    // },
+    // "material-icon-theme.folders.associations": {
+    //     "global_state": "global",
+    //     "ui": "layout",
+    //     "bloc": "controller"
+    // },
+    // "editor.fontLigatures": true,
+    // "editor.fontWeight": "200",
+    // "dart.previewFlutterUiGuidesCustomTracking": true,
+    // "dart.previewFlutterUiGuides": true
+}
