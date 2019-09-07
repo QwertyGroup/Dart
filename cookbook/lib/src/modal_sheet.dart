@@ -53,13 +53,23 @@ class _ModalSheetState extends State<ModalSheet> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 22),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Icon(
-                    CFIdentity.fff_orsen,
-                    size: 30,
-                    color: Theme.of(context).canvasColor,
+                  child: Row(
+                    children: <Widget>[
+                      ...List.generate(
+                        3,
+                        (_) => Padding(
+                          padding: const EdgeInsets.only(left: 26),
+                          child: Icon(
+                            CFIdentity.fff_orsen,
+                            size: 30,
+                            color: Theme.of(context).canvasColor,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -78,6 +88,91 @@ class _ModalSheetState extends State<ModalSheet> {
               Icon(
                 CFIdentity.fff_circs,
                 size: 200,
+              )
+            else if (_selectedItem == 'bm')
+              Column(
+                children: <Widget>[
+                  Transform.translate(
+                    offset: Offset(-20, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Transform.translate(
+                          offset: Offset(17, -6),
+                          child: Icon(
+                            Icons.settings,
+                            size: 76,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Transform.rotate(
+                          angle: 43 / 180 * pi,
+                          child: Icon(
+                            Icons.settings,
+                            size: 76,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Transform.translate(
+                          offset: Offset(-4, 0),
+                          child: Text(
+                            'BM',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 80,
+                              color: CupertinoColors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ...List.generate(
+                    2,
+                    (_) => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ...List.generate(
+                          6,
+                          (_) => Row(
+                            children: <Widget>[
+                              Transform.rotate(
+                                angle: -12 * pi / 180,
+                                child: Text(
+                                  'BM',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: CupertinoColors.black,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'BM',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: CupertinoColors.black,
+                                ),
+                              ),
+                              Transform.rotate(
+                                angle: 12 * pi / 180,
+                                child: Text(
+                                  'BM',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: CupertinoColors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               )
             else
               Text(
@@ -245,7 +340,7 @@ class _ModalSheetState extends State<ModalSheet> {
                           ),
                         ],
                       ),
-                      onTap: () => _selectItem('BM'),
+                      onTap: () => _selectItem('bm'),
                     ),
                     ListTile(
                       // leading: Icon(Icons.assessment, color: Colors.black),
@@ -253,17 +348,19 @@ class _ModalSheetState extends State<ModalSheet> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Transform.translate(
-                            offset: Offset(-7, 0),
+                            // offset: Offset(-7, 0),
+                            offset: Offset(0, 0),
                             // angle: pi / 4,
                             // alignment: Alignment.centerLeft,
                             child: Icon(
                               CFIdentity.cflogo_cell,
                               color: Colors.black,
-                              size: 18,
+                              // size: 18,
                             ),
                           ),
                           Transform.translate(
-                            offset: Offset(-7, 0),
+                            // offset: Offset(-7, 0),
+                            offset: Offset(0, 0),
                             child: Text(
                               'Crystal',
                               textAlign: TextAlign.start,
