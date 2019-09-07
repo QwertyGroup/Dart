@@ -8,8 +8,8 @@
 		"editor.formatOnSave": true,
 		"dart.flutterCreateAndroidLanguage": "kotlin",
 		"dart.flutterCreateIOSLanguage": "swift",
-		"workbench.colorTheme": "Material Theme Darker",
-		"editor.fontFamily": "Fira Code",
+		// "workbench.colorTheme": "Material Theme Darker",
+		// "editor.fontFamily": "Fira Code",
 		"workbench.colorCustomizations": {
 			"[Material Theme Darker]": {
 				"statusBar.debuggingBackground": "#212121"
@@ -21,7 +21,7 @@
 			"bloc": "controller"
 		},
 		"editor.fontLigatures": true,
-		"editor.fontWeight": "200",
+		// "editor.fontWeight": "200",
 		"dart.previewFlutterUiGuidesCustomTracking": true,
 		"dart.previewFlutterUiGuides": true
 	}
