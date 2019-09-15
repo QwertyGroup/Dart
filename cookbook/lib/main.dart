@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:cookbook/src/backdrop.dart';
 import 'package:cookbook/src/frosted.dart';
 import 'package:cookbook/src/modal_sheet.dart';
+import 'package:cookbook/src/pageswipe.dart';
 import 'package:cookbook/src/phys_card.dart';
 import 'package:cookbook/src/postiles.dart';
 import 'package:cookbook/src/todo_list.dart';
@@ -14,15 +16,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CookBook',
+      title: 'Playground',
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.red,
       ),
       // home: PhysicsCardDragDemo(), // PhysicsCardDragDemo
       // home: FrozenList(), // Frosted list
       // home: ModalSheet(),
       // home: PositionedTiles(),
-      home: TodoList(),
+      // home: TodoListPage(),
+      // home: BackdropPage(),
+      home: PageSwipe(),
       debugShowCheckedModeBanner: false,
     );
   }

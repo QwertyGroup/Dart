@@ -26,3 +26,8 @@ flutter:
       - asset: assets/icons/CFIdentity.ttf
 
   uses-material-design: true
+
+  assets:
+    - assets/images/image_one.png
+    - assets/images/image_two.jpg
+    - assets/images/image_three.jpg

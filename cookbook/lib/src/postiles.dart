@@ -69,14 +69,26 @@ class _TestState extends State<Test> {
     //   color: _color,
     // );
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(1.0),
-        child: Material(
-          color: _color,
-          elevation: 17,
-          shadowColor: _color,
-          animationDuration: Duration(seconds: 1),
-          borderRadius: BorderRadius.all(Radius.circular(_radius)),
+      child: LayoutBuilder(
+        builder: (context, constraints) => Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Material(
+            color: _color,
+            elevation: 17,
+            shadowColor: _color,
+            animationDuration: Duration(seconds: 1),
+            // borderRadius: BorderRadius.all(Radius.circular(_radius)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                Random().nextDouble() *
+                    min(constraints.biggest.width / 2,
+                        constraints.biggest.height / 2),
+              ),
+            ),
+            child: Center(
+              child: Text('${constraints.biggest.width}'),
+            ),
+          ),
         ),
       ),
     );
