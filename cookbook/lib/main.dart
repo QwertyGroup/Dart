@@ -7,6 +7,7 @@ import 'package:cookbook/src/pageswipe.dart';
 import 'package:cookbook/src/phys_card.dart';
 import 'package:cookbook/src/postiles.dart';
 import 'package:cookbook/src/todo_list.dart';
+import 'package:cookbook/src/waveslider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       // home: PositionedTiles(),
       // home: TodoListPage(),
       // home: BackdropPage(),
-      home: PageSwipe(),
+      // home: PageSwipe(),
+      home: WaveApp(),
       debugShowCheckedModeBanner: false,
     );
   }
