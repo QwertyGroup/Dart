@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class PageSwipe extends StatelessWidget {
@@ -16,7 +18,7 @@ class PageSwipe extends StatelessWidget {
           child: PageView.builder(
             controller: PageController(
               viewportFraction: .8,
-              initialPage: 1,
+              initialPage: 0,
             ),
             itemCount: _images.length,
             physics: BouncingScrollPhysics(),
@@ -99,7 +101,7 @@ class Tile extends StatelessWidget {
                 ),
               ),
             onLongPress: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -109,15 +111,19 @@ class Tile extends StatelessWidget {
                       child: Tile(images, i),
                     ),
                     floatingActionButtonLocation:
-                        FloatingActionButtonLocation.endDocked,
+                        FloatingActionButtonLocation.endFloat,
                     floatingActionButton: FloatingActionButton(
                       // elevation: 0,
-                      child: Icon(
-                        Icons.blur_circular,
-                        color: Colors.white,
+                      child: Transform.rotate(
+                        angle: -pi / 2,
+                        child: Icon(
+                          Icons.keyboard_backspace,
+                          color: Colors.white,
+                        ),
                       ),
-                      backgroundColor: Colors.redAccent,
+                      backgroundColor: Colors.black,
                       onPressed: () => Navigator.of(context).pop(),
+                      // onPressed: () {},
                     ),
                   ),
                 ),
