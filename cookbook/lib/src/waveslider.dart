@@ -33,7 +33,7 @@ class WaveSlider extends StatefulWidget {
 
 class _WaveSliderState extends State<WaveSlider> {
   double _dragPosition = 0;
-  double get _dragPercentage => _dragPosition / widget.width * 100;
+  double get _dragPercentage => _dragPosition / widget.width;
 
   void _updateDragPosition(Offset offset) {
     double newDragPosition;
@@ -124,17 +124,28 @@ class WavePainter extends CustomPainter {
     canvas.drawCircle(Offset(size.width, size.height), 5, fillPainter);
   }
 
-  WaveCurveDefinitions _calculateWaveCurveDefinitions() {
-    double bendWidth = 40;
-    double bezierWidth = 40;
+  WaveCurveDefinitions _calculateWaveCurveDefinitions(Size size) {
+    double minWaveHeight = 0.2 * size.height;
+    double maxWaveHeight = 0.8 * size.height;
+
+    double controlHeight =
+        (size.height - minWaveHeight) - (maxWaveHeight * dragPercentage);
+
+    double bendWidth = 20 + 20 * dragPercentage;
+    double bezierWidth = 20 + 20 * dragPercentage;
+
+    double centerPoint = sliderPosition;
+    centerPoint = (centerPoint > size.width) ? size.width : centerPoint;
 
     double startOfBend = sliderPosition - bendWidth / 2;
     double endOfBend = sliderPosition + bendWidth / 2;
     double startOfBezier = startOfBend - bezierWidth;
     double endOfBezier = endOfBend + bezierWidth;
 
-    double controlHeight = 0;
-    double centerPoint = sliderPosition;
+    startOfBend = (startOfBend <= 0) ? 0 : startOfBend;
+    startOfBezier = (startOfBezier <= 0) ? 0 : startOfBezier;
+    endOfBend = (endOfBend >= size.width) ? size.width : endOfBend;
+    endOfBezier = (endOfBezier >= size.width) ? size.width : endOfBezier;
 
     double leftControlPoint1 = startOfBend;
     double leftControlPoint2 = startOfBend;
@@ -142,34 +153,25 @@ class WavePainter extends CustomPainter {
     double rightControlPoint2 = endOfBend;
 
     double bendability = 25;
-    double maxSlideDifference = 20;
+    double maxSlideDifference = 30;
 
     double slideDifference = (sliderPosition - _previousSliderPosition).abs();
     if (slideDifference > maxSlideDifference) {
       slideDifference = maxSlideDifference;
     }
 
-    double bend = lerpDouble(
-      0,
-      bendability,
-      slideDifference / maxSlideDifference,
-    );
-
     bool moveLeft = sliderPosition < _previousSliderPosition;
 
-    if (moveLeft) {
-      leftControlPoint1 -= bend;
-      leftControlPoint2 += bend;
-      rightControlPoint1 += bend;
-      rightControlPoint2 -= bend;
-      centerPoint += bend;
-    } else {
-      leftControlPoint1 += bend;
-      leftControlPoint2 -= bend;
-      rightControlPoint1 -= bend;
-      rightControlPoint2 += bend;
-      centerPoint -= bend;
-    }
+    double bend =
+        lerpDouble(0, bendability, slideDifference / maxSlideDifference);
+
+    bend = moveLeft ? -bend : bend;
+
+    leftControlPoint1 += bend;
+    leftControlPoint2 -= bend;
+    rightControlPoint1 -= bend;
+    rightControlPoint2 += bend;
+    centerPoint -= bend;
 
     var waveCurve = WaveCurveDefinitions(
       startOfBezier: startOfBezier,
@@ -185,7 +187,7 @@ class WavePainter extends CustomPainter {
   }
 
   _paintWaveLine(Canvas canvas, Size size) {
-    WaveCurveDefinitions waveCurve = _calculateWaveCurveDefinitions();
+    WaveCurveDefinitions waveCurve = _calculateWaveCurveDefinitions(size);
 
     Path path = Path()
       ..moveTo(0, size.height)
