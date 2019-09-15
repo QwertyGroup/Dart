@@ -106,13 +106,61 @@ class WavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     _paintAnchors(canvas, size);
-    _paintLine(canvas, size);
-    _paintBlock(canvas, size);
+    // _paintLine(canvas, size);
+    // _paintBlock(canvas, size);
+    _paintWaveLine(canvas, size);
   }
 
   _paintAnchors(Canvas canvas, Size size) {
     canvas.drawCircle(Offset(0, size.height), 5, fillPainter);
     canvas.drawCircle(Offset(size.width, size.height), 5, fillPainter);
+  }
+
+  _paintWaveLine(Canvas canvas, Size size) {
+    double bendWidth = 40;
+    double bezierWidth = 40;
+
+    double startOfBend = sliderPosition - bendWidth / 2;
+    double startOfBezier = startOfBend - bezierWidth;
+    double endOfBend = sliderPosition + bendWidth / 2;
+    double endOfBezier = endOfBend + bezierWidth;
+
+    double controlHeight = 0;
+    double centerPoint = sliderPosition;
+
+    double leftControlPoint1 = startOfBend;
+    double leftControlPoint2 = startOfBend;
+    double rightControlPoint1 = endOfBend;
+    double rightControlPoint2 = endOfBend;
+
+    Path path = Path()
+      ..moveTo(0, size.height)
+      ..lineTo(
+        startOfBezier,
+        size.height,
+      )
+      ..cubicTo(
+        leftControlPoint1,
+        size.height,
+        leftControlPoint2,
+        controlHeight,
+        centerPoint,
+        controlHeight,
+      )
+      ..cubicTo(
+        rightControlPoint1,
+        controlHeight,
+        rightControlPoint2,
+        size.height,
+        endOfBezier,
+        size.height,
+      )
+      ..lineTo(
+        size.width,
+        size.height,
+      );
+
+    canvas.drawPath(path, wavePainter);
   }
 
   _paintLine(Canvas canvas, Size size) {
