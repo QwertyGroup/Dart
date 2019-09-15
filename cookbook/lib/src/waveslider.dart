@@ -82,7 +82,6 @@ class _WaveSliderState extends State<WaveSlider>
 
   void _onDragEnd(BuildContext context, DragEndDetails end) {
     _slideController.setStateToStopping();
-    // TODO: do I need this?
     setState(() {});
   }
 
@@ -354,7 +353,7 @@ class WaveSliderController extends ChangeNotifier {
   }
 
   void _startAnimation() {
-    controller.duration = Duration(microseconds: 500);
+    controller.duration = Duration(milliseconds: 600);
     controller.forward(from: 0);
     notifyListeners();
   }
