@@ -16,6 +16,7 @@ class _WaveAppState extends State<WaveApp> {
   final _notifications = FlutterLocalNotificationsPlugin();
   int _age = 0;
   bool _notificationsOn = false;
+  // int _notificationId = 0;
 
   @override
   void initState() {
@@ -63,16 +64,19 @@ class _WaveAppState extends State<WaveApp> {
                     'channel desc',
                     importance: Importance.High,
                     priority: Priority.High,
-                    ongoing: true,
-                    // indeterminate: true,
-                    // icon: '@drawable/app_icon',
-                    // largeIcon: '@drawable/app_icon',
+                    ongoing: false,
+                    onlyAlertOnce: true,
+                    playSound: true,
                     showProgress: true,
                     progress: age,
                     maxProgress: 100,
                     autoCancel: false,
-                    // channelShowBadge: true,
                     color: Colors.red,
+                    // largeIcon: 'app_icon',
+                    // indeterminate: true,
+                    // icon: '@drawable/app_icon',
+                    // largeIcon: '@drawable/app_icon',
+                    // channelShowBadge: true,
                   );
                   final iOSNotificationDetails = IOSNotificationDetails();
                   final notificationDetails = NotificationDetails(
