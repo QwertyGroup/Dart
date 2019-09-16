@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
       // home: PositionedTiles(),
       // home: TodoListPage(),
       // home: BackdropPage(),
-      // home: PageSwipe(),
-      home: WaveApp(),
+      home: PageSwipe(),
+      // home: WaveApp(),
       debugShowCheckedModeBanner: false,
     );
   }
