@@ -4,6 +4,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'package:flutter/services.dart';
 
 class WaveApp extends StatefulWidget {
@@ -12,18 +13,39 @@ class WaveApp extends StatefulWidget {
 }
 
 class _WaveAppState extends State<WaveApp> {
+  final _notifications = FlutterLocalNotificationsPlugin();
   int _age = 0;
+  bool _notificationsOn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final settingAndroid = AndroidInitializationSettings('app_icon');
+    final settingsIOS = IOSInitializationSettings(
+        onDidReceiveLocalNotification: (id, title, body, payload) =>
+            onSelectNotification(payload));
+    _notifications.initialize(
+        InitializationSettings(settingAndroid, settingsIOS),
+        onSelectNotification: onSelectNotification);
+  }
+
+  Future onSelectNotification(String payload) {
+    return Future.sync(() {
+      print(payload);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(32),
+        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 10),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Spacer(),
               Text(
                 'Select your age',
                 style: TextStyle(fontSize: 45, fontFamily: 'Exo'),
@@ -31,7 +53,33 @@ class _WaveAppState extends State<WaveApp> {
               WaveSlider(
                 onChanged: (double val) =>
                     setState(() => _age = (val * 100).round()),
-                // onChanged: null,
+                onSelected: (double val) {
+                  if (!_notificationsOn) return;
+                  final age = (val * 100).round();
+
+                  final androidNotificationDetails = AndroidNotificationDetails(
+                    'channel id',
+                    'channel name',
+                    'channel desc',
+                    importance: Importance.High,
+                    priority: Priority.High,
+                    ongoing: true,
+                    // indeterminate: true,
+                    // icon: '@drawable/app_icon',
+                    // largeIcon: '@drawable/app_icon',
+                    showProgress: true,
+                    progress: age,
+                    maxProgress: 100,
+                    autoCancel: false,
+                    // channelShowBadge: true,
+                    color: Colors.red,
+                  );
+                  final iOSNotificationDetails = IOSNotificationDetails();
+                  final notificationDetails = NotificationDetails(
+                      androidNotificationDetails, iOSNotificationDetails);
+                  _notifications.show(
+                      0, 'WaveLine', 'Your age $age', notificationDetails);
+                },
               ),
               SizedBox(
                 height: 50,
@@ -63,7 +111,31 @@ class _WaveAppState extends State<WaveApp> {
                   ),
                 ],
               ),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Toggle notifications',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: 'Exo',
+                    ),
+                  ),
+                  Switch(
+                    value: _notificationsOn,
+                    onChanged: (val) {
+                      setState(() {
+                        _notificationsOn = val;
+                        // print(val);
+                      });
+                    },
+                  ),
+                ],
+              ),
             ],
+            // mainAxisSize: MainAxisSize.max,
           ),
         ),
       ),
@@ -77,11 +149,13 @@ class WaveSlider extends StatefulWidget {
   final Color color;
 
   final ValueChanged<double> onChanged;
+  final ValueChanged<double> onSelected;
 
   const WaveSlider({
     this.width = 350,
     this.height = 50,
     this.color = Colors.black,
+    this.onSelected,
     @required this.onChanged,
   }) : assert(height >= 50 && height <= 600);
 
@@ -128,6 +202,10 @@ class _WaveSliderState extends State<WaveSlider>
     widget.onChanged?.call(val);
   }
 
+  _handleSelected(double val) {
+    widget.onSelected?.call(val);
+  }
+
   void _onDragUpdate(BuildContext context, DragUpdateDetails update) {
     RenderBox box = context.findRenderObject();
     Offset offset = box.globalToLocal(update.globalPosition);
@@ -146,7 +224,7 @@ class _WaveSliderState extends State<WaveSlider>
 
   void _onDragEnd(BuildContext context, DragEndDetails end) {
     _slideController.setStateToStopping();
-    // _handleChangeUpdate(_dragPercentage);
+    _handleSelected(_dragPercentage);
     setState(() {});
   }
 
