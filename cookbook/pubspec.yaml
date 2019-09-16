@@ -21,9 +21,15 @@ dev_dependencies:
 
 flutter:
   fonts:
-   - family: CFIdentity
-     fonts:
-      - asset: assets/icons/CFIdentity.ttf
+    - family: CFIdentity
+      fonts:
+        - asset: assets/icons/CFIdentity.ttf
+    - family: Exo
+      fonts:
+        - asset: assets/fonts/Exo-Regular.ttf
+    - family: TextMeOne
+      fonts:
+        - asset: assets/fonts/TextMeOne-Regular.ttf
 
   uses-material-design: true
 

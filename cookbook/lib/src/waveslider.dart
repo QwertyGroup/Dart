@@ -4,13 +4,68 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
 
-class WaveApp extends StatelessWidget {
+class WaveApp extends StatefulWidget {
+  @override
+  _WaveAppState createState() => _WaveAppState();
+}
+
+class _WaveAppState extends State<WaveApp> {
+  int _age = 0;
+
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return Scaffold(
-      body: Center(
-        child: WaveSlider(),
+      body: Container(
+        padding: EdgeInsets.all(32),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Select your age',
+                style: TextStyle(fontSize: 45, fontFamily: 'Exo'),
+              ),
+              WaveSlider(
+                onChanged: (double val) =>
+                    setState(() => _age = (val * 100).round()),
+                // onChanged: null,
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: <Widget>[
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    '$_age',
+                    style: TextStyle(
+                      fontSize: 45,
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  Text(
+                    'YEARS',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'TextMeOne',
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -21,11 +76,14 @@ class WaveSlider extends StatefulWidget {
   final double height;
   final Color color;
 
+  final ValueChanged<double> onChanged;
+
   const WaveSlider({
     this.width = 350,
     this.height = 50,
     this.color = Colors.black,
-  });
+    @required this.onChanged,
+  }) : assert(height >= 50 && height <= 600);
 
   @override
   _WaveSliderState createState() => _WaveSliderState();
@@ -66,11 +124,16 @@ class _WaveSliderState extends State<WaveSlider>
     });
   }
 
+  _handleChangeUpdate(double val) {
+    widget.onChanged?.call(val);
+  }
+
   void _onDragUpdate(BuildContext context, DragUpdateDetails update) {
     RenderBox box = context.findRenderObject();
     Offset offset = box.globalToLocal(update.globalPosition);
     _slideController.setStateToSliding();
     _updateDragPosition(offset);
+    _handleChangeUpdate(_dragPercentage);
   }
 
   void _onDragStart(BuildContext context, DragStartDetails start) {
@@ -78,10 +141,12 @@ class _WaveSliderState extends State<WaveSlider>
     Offset offset = box.globalToLocal(start.globalPosition);
     _slideController.setStateToStarting();
     _updateDragPosition(offset);
+    _handleChangeUpdate(_dragPercentage);
   }
 
   void _onDragEnd(BuildContext context, DragEndDetails end) {
     _slideController.setStateToStopping();
+    // _handleChangeUpdate(_dragPercentage);
     setState(() {});
   }
 
@@ -353,7 +418,7 @@ class WaveSliderController extends ChangeNotifier {
   }
 
   void _startAnimation() {
-    controller.duration = Duration(milliseconds: 600);
+    controller.duration = Duration(milliseconds: 500);
     controller.forward(from: 0);
     notifyListeners();
   }
