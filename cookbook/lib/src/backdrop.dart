@@ -1,3 +1,7 @@
+import 'package:cookbook/src/cf_identity.dart';
+import 'package:cookbook/src/pageswipe.dart';
+import 'package:cookbook/src/staggered.dart';
+import 'package:cookbook/src/waveslider.dart';
 import 'package:flutter/material.dart';
 
 class BackdropPage extends StatefulWidget {
@@ -31,6 +35,10 @@ class _BackdropPageState extends State<BackdropPage>
         status == AnimationStatus.forward;
   }
 
+  void _triggerFling() {
+    _controller.fling(velocity: isPanelVisible ? -1 : 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,33 +46,37 @@ class _BackdropPageState extends State<BackdropPage>
         title: Text('Backdrop'),
         elevation: 0,
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.add_shopping_cart),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.airplanemode_inactive),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Icon(Icons.add_shopping_cart),
+          // ),
+          IconButton(
+            icon: AnimatedIcon(
+              icon: AnimatedIcons.close_menu,
+              progress: _controller.view,
+            ),
+            onPressed: _triggerFling,
           ),
         ],
-        leading: IconButton(
-          icon: AnimatedIcon(
-            icon: AnimatedIcons.close_menu,
-            progress: _controller.view,
-          ),
-          onPressed: () {
-            _controller.fling(velocity: isPanelVisible ? -1 : 1);
-          },
+        // airplanemode_inactive
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(CFIdentity.fff_circs),
+          // child: Icon(CFIdentity.cflogo_cell_negative),
         ),
       ),
-      body: TwoPanels(controller: _controller),
+      body: TwoPanels(
+        controller: _controller,
+        onTap: _triggerFling,
+      ),
     );
   }
 }
 
 class TwoPanels extends StatefulWidget {
   final AnimationController controller;
-  TwoPanels({this.controller});
+  final VoidCallback onTap;
+  TwoPanels({@required this.controller, @required this.onTap});
 
   @override
   _TwoPanelsState createState() => _TwoPanelsState();
@@ -115,25 +127,55 @@ class _TwoPanelsState extends State<TwoPanels> {
                 topRight: Radius.circular(16),
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Container(
-                    height: headerHeight,
-                    child: Center(
-                      child: Text(
-                        'Drag',
-                        style: theme.textTheme.button
-                            .copyWith(fontWeight: FontWeight.bold),
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    onVerticalDragStart: (_) => widget.onTap(),
+                    behavior: HitTestBehavior.opaque,
+                    child: Container(
+                      height: headerHeight,
+                      child: Center(
+                        child: Text(
+                          'Drag',
+                          style: theme.textTheme.button
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
+                  // Expanded(
+                  //   child: LayoutBuilder(
+                  //     builder: (context, constraints) {
+                  //       return FittedBox(
+                  //         fit: BoxFit.cover,
+                  //         child: Container(
+                  //           constraints: constraints,
+                  //           // child: PageSwipe(),
+                  //           child: WaveApp(),
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  // Expanded(
+                  //   child: FittedBox(
+                  //     fit: BoxFit.cover,
+                  //     child: Container(
+                  //       constraints: constraints,
+                  //       // child: PageSwipe(),
+                  //       child: WaveApp(),
+                  //     ),
+                  //   ),
+                  // ),
                   Expanded(
-                    child: Center(
-                      child: Text(
-                        'Front',
-                        style: theme.textTheme.display3,
-                      ),
+                    child: Container(
+                      constraints: constraints,
+                      // child: PageSwipe(),
+                      child: WaveApp(),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -150,3 +192,16 @@ class _TwoPanelsState extends State<TwoPanels> {
     );
   }
 }
+
+// child: Center(
+//   child: Text(
+//     'Front',
+//     style: theme.textTheme.display3,
+//   ),
+// ),
+// flex: ,
+// child: SizedBox(
+//   width: 200,
+//   height: 200,
+//   child: FittedBox(
+// fit: BoxFit.cover,

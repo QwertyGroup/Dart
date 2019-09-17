@@ -47,99 +47,109 @@ class _WaveAppState extends State<WaveApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Spacer(),
-              Text(
-                'Select your age',
-                style: TextStyle(fontSize: 45, fontFamily: 'Exo'),
+              Expanded(
+                child: Text(
+                  'Select your age',
+                  style: TextStyle(fontSize: 45, fontFamily: 'Exo'),
+                ),
               ),
-              WaveSlider(
-                onChanged: (double val) =>
-                    setState(() => _age = (val * 100).round()),
-                onSelected: (double val) {
-                  if (!_notificationsOn) return;
-                  final age = (val * 100).round();
+              Expanded(
+                child: WaveSlider(
+                  onChanged: (double val) =>
+                      setState(() => _age = (val * 100).round()),
+                  onSelected: (double val) {
+                    if (!_notificationsOn) return;
+                    final age = (val * 100).round();
 
-                  final androidNotificationDetails = AndroidNotificationDetails(
-                    'channel id',
-                    'channel name',
-                    'channel desc',
-                    importance: Importance.High,
-                    priority: Priority.High,
-                    ongoing: false,
-                    onlyAlertOnce: true,
-                    playSound: true,
-                    showProgress: true,
-                    progress: age,
-                    maxProgress: 100,
-                    autoCancel: false,
-                    color: Colors.red,
-                    // largeIcon: 'app_icon',
-                    // indeterminate: true,
-                    // icon: '@drawable/app_icon',
-                    // largeIcon: '@drawable/app_icon',
-                    // channelShowBadge: true,
-                  );
-                  final iOSNotificationDetails = IOSNotificationDetails();
-                  final notificationDetails = NotificationDetails(
-                      androidNotificationDetails, iOSNotificationDetails);
-                  _notifications.show(
-                      0, 'WaveLine', 'Your age $age', notificationDetails);
-                },
+                    final androidNotificationDetails =
+                        AndroidNotificationDetails(
+                      'channel id',
+                      'channel name',
+                      'channel desc',
+                      importance: Importance.High,
+                      priority: Priority.High,
+                      ongoing: false,
+                      onlyAlertOnce: true,
+                      playSound: true,
+                      showProgress: true,
+                      progress: age,
+                      maxProgress: 100,
+                      autoCancel: false,
+                      color: Colors.red,
+                      // largeIcon: 'app_icon',
+                      // indeterminate: true,
+                      // icon: '@drawable/app_icon',
+                      // largeIcon: '@drawable/app_icon',
+                      // channelShowBadge: true,
+                    );
+                    final iOSNotificationDetails = IOSNotificationDetails();
+                    final notificationDetails = NotificationDetails(
+                        androidNotificationDetails, iOSNotificationDetails);
+                    _notifications.show(
+                        0, 'WaveLine', 'Your age $age', notificationDetails);
+                  },
+                ),
               ),
-              SizedBox(
-                height: 50,
+              Expanded(
+                child: SizedBox(
+                  height: 50,
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: <Widget>[
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    '$_age',
-                    style: TextStyle(
-                      fontSize: 45,
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 15,
                     ),
-                  ),
-                  SizedBox(width: 15),
-                  Text(
-                    'YEARS',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'TextMeOne',
+                    Text(
+                      '$_age',
+                      style: TextStyle(
+                        fontSize: 45,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                ],
+                    SizedBox(width: 15),
+                    Text(
+                      'YEARS',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'TextMeOne',
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(),
+                    ),
+                  ],
+                ),
               ),
               Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Toggle notifications',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: 'Exo',
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Toggle notifications',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Exo',
+                      ),
                     ),
-                  ),
-                  Switch(
-                    value: _notificationsOn,
-                    onChanged: (val) {
-                      setState(() {
-                        _notificationsOn = val;
-                        // print(val);
-                      });
-                    },
-                  ),
-                ],
+                    Switch(
+                      value: _notificationsOn,
+                      onChanged: (val) {
+                        setState(() {
+                          _notificationsOn = val;
+                          // print(val);
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
-            // mainAxisSize: MainAxisSize.max,
           ),
         ),
       ),
