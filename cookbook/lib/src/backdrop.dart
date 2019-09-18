@@ -2,6 +2,7 @@ import 'package:cookbook/src/cf_identity.dart';
 import 'package:cookbook/src/pageswipe.dart';
 import 'package:cookbook/src/staggered.dart';
 import 'package:cookbook/src/waveslider.dart';
+import 'package:cookbook/src/todo_list.dart';
 import 'package:flutter/material.dart';
 
 class BackdropPage extends StatefulWidget {
@@ -107,14 +108,84 @@ class _TwoPanelsState extends State<TwoPanels> {
         children: <Widget>[
           Container(
             color: theme.primaryColor,
-            child: Center(
-              child: Text(
-                'Backpanel',
-                style: theme.textTheme.title.copyWith(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
+            // child: Center(
+            //   child: Text(
+            //     'Backpanel',
+            //     style: theme.textTheme.title.copyWith(
+            //       color: Colors.white,
+            //       fontSize: 24,
+            //     ),
+            //   ),
+            // ),
+            child: GridView.count(
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              // gridDelegate: ,
+              crossAxisCount: 3,
+              childAspectRatio: 6 / 5,
+              children:
+                  // [1, 2, 3, 4, 5]
+                  // Iterable.generate(20)
+                  [
+                'Wave Line',
+                'Page Swipe',
+                'Todo List',
+                'Modal Sheet',
+              ]
+                      .map(
+                        (i) => Card(
+                          // shape: Shape,
+                          elevation: 6,
+                          margin: EdgeInsets.all(5),
+                          // clipBehavior: Clip.,
+                          color: theme.cardColor,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text(
+                                i,
+                                style: theme.textTheme.button.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 28,
+                                child: OutlineButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(7),
+                                    ),
+                                    // side: BorderSide()
+                                  ),
+                                  // hoverColor: Colors.amber,
+                                  splashColor: theme.primaryColor,
+                                  // hoverColor: Colors.amber,
+                                  // focusColor: Colors.amber,
+                                  highlightColor: Colors.black,
+                                  // highlightElevation: 3,
+                                  // color: theme.primaryColor,
+                                  // highlightedBorderColor: Colors.blue,
+                                  borderSide: BorderSide(
+                                    color: theme.primaryColor,
+                                    style: BorderStyle.solid,
+                                    width: 1,
+                                  ),
+                                  child: Text(
+                                    'Launch',
+                                    style: theme.textTheme.title.copyWith(
+                                      color: theme.primaryColor,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
             ),
           ),
           PositionedTransition(
@@ -174,6 +245,7 @@ class _TwoPanelsState extends State<TwoPanels> {
                       constraints: constraints,
                       // child: PageSwipe(),
                       child: WaveApp(),
+                      // child: TodoListPage(),
                     ),
                   ),
                 ],

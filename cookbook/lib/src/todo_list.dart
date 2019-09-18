@@ -170,7 +170,8 @@ class _TodoListState extends State<TodoList> {
                               child: SizedBox(
                                 child: FittedBox(
                                   fit: BoxFit.fitHeight,
-                                  child: BM(),
+                                  // child: BM(),
+                                  child: Placeholder(),
                                 ),
                                 height: 38,
                               ),
