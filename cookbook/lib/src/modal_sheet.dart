@@ -98,135 +98,149 @@ class _ModalSheetState extends State<ModalSheet> with TickerProviderStateMixin {
             //   Icon(CFIdentity.fff_circs)
             // ],
             if (_selectedItem == 'cf')
-              Icon(
-                CFIdentity.fff_circs,
-                size: 200,
+              Expanded(
+                child: Icon(
+                  CFIdentity.fff_circs,
+                  size: 200,
+                ),
               )
             else if (_selectedItem == 'bm')
-              Column(
-                children: <Widget>[
-                  Transform.translate(
-                    offset: Offset(-20, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Transform.translate(
-                          offset: Offset(19, -9.0), // ln: 29
-                          child: Transform.rotate(
-                            angle: 4.8 / 180 * pi,
-                            child: RotationTransition(
-                              turns: Tween<double>(
-                                begin: 0,
-                                end: 2,
-                              ).animate(
-                                CurvedAnimation(
-                                  curve: Curves.easeInOutBack,
-                                  parent: _controller,
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.settings,
-                                size: 76,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Transform.rotate(
-                          angle: 44 / 180 * pi,
-                          child: RotationTransition(
-                            turns: Tween<double>(
-                              begin: 2,
-                              end: 0,
-                            ).animate(
-                              CurvedAnimation(
-                                curve: Curves.easeInOutBack,
-                                // reverseCurve: Curves.easeInOut,
-                                parent: _controller,
-                              ),
-                            ),
-                            child: Icon(
-                              Icons.settings,
-                              size: 76,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        Transform.translate(
-                          offset: Offset(-4, 0),
-                          child: Text(
-                            'BM',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 80,
-                              color: CupertinoColors.black,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  ...List.generate(
-                    2,
-                    (_) => SizedBox(
-                      height: 12,
-                      width: double.infinity,
-                      child: FittedBox(
-                        fit: BoxFit.none,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Spacer(),
+                    Expanded(
+                      flex: 1,
+                      child: Transform.translate(
+                        offset: Offset(-20, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            ...List.generate(
-                              5, // 6
-                              (_) => Row(
-                                children: <Widget>[
-                                  Transform.rotate(
-                                    angle: -12 * pi / 180,
-                                    child: Text(
-                                      'BM',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
-                                        color: CupertinoColors.black,
-                                      ),
+                            Transform.translate(
+                              offset: Offset(19, -9.0), // ln: 29
+                              child: Transform.rotate(
+                                angle: 4.8 / 180 * pi,
+                                child: RotationTransition(
+                                  turns: Tween<double>(
+                                    begin: 0,
+                                    end: 2,
+                                  ).animate(
+                                    CurvedAnimation(
+                                      curve: Curves.easeInOutBack,
+                                      parent: _controller,
                                     ),
                                   ),
-                                  Text(
-                                    'BM',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                      color: CupertinoColors.black,
-                                    ),
+                                  child: Icon(
+                                    Icons.settings,
+                                    size: 76,
+                                    color: Colors.black,
                                   ),
-                                  Transform.rotate(
-                                    angle: 12 * pi / 180,
-                                    child: Text(
-                                      'BM',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
-                                        color: CupertinoColors.black,
-                                      ),
-                                    ),
+                                ),
+                              ),
+                            ),
+                            Transform.rotate(
+                              angle: 44 / 180 * pi,
+                              child: RotationTransition(
+                                turns: Tween<double>(
+                                  begin: 2,
+                                  end: 0,
+                                ).animate(
+                                  CurvedAnimation(
+                                    curve: Curves.easeInOutBack,
+                                    // reverseCurve: Curves.easeInOut,
+                                    parent: _controller,
                                   ),
-                                ],
+                                ),
+                                child: Icon(
+                                  Icons.settings,
+                                  size: 76,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            Transform.translate(
+                              offset: Offset(-4, 0),
+                              child: Text(
+                                'BM',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 80,
+                                  color: CupertinoColors.black,
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    ...List.generate(
+                      2,
+                      (_) => SizedBox(
+                        height: 12,
+                        width: double.infinity,
+                        child: FittedBox(
+                          fit: BoxFit.none,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ...List.generate(
+                                5, // 6
+                                (_) => Row(
+                                  children: <Widget>[
+                                    Transform.rotate(
+                                      angle: -12 * pi / 180,
+                                      child: Text(
+                                        'BM',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                          color: CupertinoColors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      'BM',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        color: CupertinoColors.black,
+                                      ),
+                                    ),
+                                    Transform.rotate(
+                                      angle: 12 * pi / 180,
+                                      child: Text(
+                                        'BM',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                          color: CupertinoColors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                  ],
+                ),
               )
             else
-              Text(
-                _selectedItem,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 70,
-                  color: CupertinoColors.black,
+              Expanded(
+                child: Center(
+                  child: Text(
+                    _selectedItem,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 70,
+                      color: CupertinoColors.black,
+                    ),
+                  ),
                 ),
               )
           ],
