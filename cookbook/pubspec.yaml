@@ -10,6 +10,7 @@ dependencies:
   sensors: ^0.4.0+1
   flutter_local_notifications: ^0.8.3
   flutter_bloc: ^0.21.0
+  cloud_firestore: ^0.12.9+4
 
   flutter:
     sdk: flutter

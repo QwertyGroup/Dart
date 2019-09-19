@@ -8,12 +8,16 @@ class SignIn extends StatelessWidget {
       body: SafeArea(
         child: Container(
           alignment: Alignment.center,
-          child: StreamBuilder(
-              stream: Firestore.instance.collection('names').snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) return Text('Default');
-                return Text(snapshot.data.documents.first);
-              }),
+          child: StreamBuilder<QuerySnapshot>(
+            stream: Firestore.instance.collection('names').snapshots(),
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<QuerySnapshot> snapshot,
+            ) {
+              if (!snapshot.hasData) return Text('Default');
+              return Text(snapshot.data.documents[0]['title']);
+            },
+          ),
         ),
       ),
     );
