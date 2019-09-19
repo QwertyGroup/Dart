@@ -1,5 +1,6 @@
 import 'package:cookbook/src/modal_sheet.dart';
 import 'package:cookbook/src/pageswipe.dart';
+import 'package:cookbook/src/signin.dart';
 import 'package:cookbook/src/todo_list.dart';
 import 'package:cookbook/src/waveslider.dart';
 import 'package:flutter/material.dart';
@@ -18,5 +19,6 @@ class BCardData {
     BCardData(title: 'Page Swipe', content: PageSwipe()),
     BCardData(title: 'Todo List', content: TodoListPage()),
     BCardData(title: 'Modal Sheet', content: ModalSheet()),
+    BCardData(title: 'Sing In', content: SignIn()),
   ];
 }

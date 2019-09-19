@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "781978739000",
+    "firebase_url": "https://crystal-factory.firebaseio.com",
+    "project_id": "crystal-factory",
+    "storage_bucket": "crystal-factory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781978739000:android:ab4cb61b0d853057afe1cd",
+        "android_client_info": {
+          "package_name": "com.crystalfactory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781978739000-rf20jq2s3i36ee131eppqaro7a7kqfqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyQefqZIESDhTOnIF78CrxWCejc7zEpRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781978739000-rf20jq2s3i36ee131eppqaro7a7kqfqk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
