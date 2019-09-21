@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "781978739000-k9vsa3glsso4g8voo14m65ashimkv9tl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crystalfactory",
+            "certificate_hash": "b1b04c624d24b291a85e30cab8c36836b3b5b32e"
+          }
+        },
+        {
           "client_id": "781978739000-rf20jq2s3i36ee131eppqaro7a7kqfqk.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "781978739000-rf20jq2s3i36ee131eppqaro7a7kqfqk.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "781978739000-2kvvd6fje3airo3v76tj9ssk5tqfvcka.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.crystalfactory"
+              }
             }
           ]
         }
