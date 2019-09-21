@@ -84,9 +84,12 @@ class SignIn extends StatefulWidget {
     });
   }
 
-  void signOut() {
+  void signOut() async {
     auth.signOut();
-    googleSignIn.disconnect();
+    if (await googleSignIn.isSignedIn()) {
+      googleSignIn.signOut();
+      // googleSignIn.disconnect();
+    }
   }
 }
 
