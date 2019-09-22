@@ -30,14 +30,16 @@ class _MyAppState extends State<MyApp> {
 
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
+        gradient: LinearGradient(
+          colors: [
             Color(0xFF1b1e44),
             Color(0xFF2d3447),
           ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              tileMode: TileMode.clamp)),
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          tileMode: TileMode.clamp,
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
@@ -236,9 +238,10 @@ class CardScrollWidget extends StatelessWidget {
 
           var start = padding +
               max(
-                  primaryCardLeft -
-                      horizontalInset * -delta * (isOnRight ? 15 : 1),
-                  0.0);
+                primaryCardLeft -
+                    horizontalInset * -delta * (isOnRight ? 15 : 1),
+                0.0,
+              );
 
           var cardItem = Positioned.directional(
             top: padding + verticalInset * max(-delta, 0.0),

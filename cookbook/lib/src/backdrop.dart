@@ -133,7 +133,10 @@ class _TwoPanelsState extends State<TwoPanels> {
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
               // gridDelegate: ,
-              crossAxisCount: 3,
+              crossAxisCount:
+                  MediaQuery.of(context).orientation == Orientation.portrait
+                      ? 3
+                      : 5,
               childAspectRatio: 6 / 5,
               // crossAxisSpacing: 4,
               // mainAxisSpacing: 4,

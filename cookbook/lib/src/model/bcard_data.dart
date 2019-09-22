@@ -1,3 +1,4 @@
+import 'package:cookbook/src/dynamic_list.dart';
 import 'package:cookbook/src/modal_sheet.dart';
 import 'package:cookbook/src/pageswipe.dart';
 import 'package:cookbook/src/signin.dart';
@@ -20,5 +21,6 @@ class BCardData {
     BCardData(title: 'Todo List', content: TodoListPage()),
     BCardData(title: 'Modal Sheet', content: ModalSheet()),
     BCardData(title: 'Sing In', content: SignIn()),
+    BCardData(title: 'Dynamic List', content: DynamicList()),
   ];
 }
