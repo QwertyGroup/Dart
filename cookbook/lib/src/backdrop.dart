@@ -53,11 +53,7 @@ class _BackdropPageState extends State<BackdropPage>
   }
 
   void _triggerFling() {
-    if (!isPanelVisible) {
-      _controller.fling(velocity: isPanelVisible ? -1 : 1);
-    } else {
-      _controller.fling(velocity: -1);
-    }
+    _controller.fling(velocity: isPanelVisible ? -1 : 1);
   }
 
   @override
@@ -389,9 +385,9 @@ class BackdropCard extends StatelessWidget {
                 // print('pressed');
                 BlocProvider.of<BCardBloc>(context).dispatch(LaunchEvent(data));
 
-                // if (!backdropPageKey.currentState.isPanelVisible) {
-                onTap();
-                // }
+                if (!backdropPageKey.currentState.isPanelVisible) {
+                  onTap();
+                }
               },
             ),
           )
