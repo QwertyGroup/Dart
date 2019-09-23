@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cookbook/src/backdrop.dart';
+import 'package:cookbook/src/backdrop2.dart';
 import 'package:cookbook/src/frosted.dart';
 import 'package:cookbook/src/modal_sheet.dart';
 import 'package:cookbook/src/navi.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       // home: PositionedTiles(),
       // home: TodoListPage(),
       home: BackdropPage(),
+      // home: Scaffold(body: SafeArea(child: Backdrop2())),
       // home: PageSwipe(),
       // home: WaveApp(),
       // home: Navi(),

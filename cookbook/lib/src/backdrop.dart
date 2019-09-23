@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cookbook/src/bloc/bcard_bloc.dart';
 import 'package:cookbook/src/cf_identity.dart';
 import 'package:cookbook/src/modal_sheet.dart';
@@ -10,9 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BackdropPage extends StatefulWidget {
+  BackdropPage() : super(key: backdropPageKey);
   @override
   _BackdropPageState createState() => _BackdropPageState();
 }
+
+// GlobalKey key = GlobalKey<BackdropPage>();
+final GlobalKey<_BackdropPageState> backdropPageKey =
+    GlobalKey<_BackdropPageState>();
 
 class _BackdropPageState extends State<BackdropPage>
     with SingleTickerProviderStateMixin {
@@ -46,7 +53,11 @@ class _BackdropPageState extends State<BackdropPage>
   }
 
   void _triggerFling() {
-    _controller.fling(velocity: isPanelVisible ? -1 : 1);
+    if (!isPanelVisible) {
+      _controller.fling(velocity: isPanelVisible ? -1 : 1);
+    } else {
+      _controller.fling(velocity: -1);
+    }
   }
 
   @override
@@ -89,6 +100,8 @@ class _BackdropPageState extends State<BackdropPage>
 class TwoPanels extends StatefulWidget {
   final AnimationController controller;
   final VoidCallback onTap;
+  final double flingVelocity = 1;
+
   TwoPanels({@required this.controller, @required this.onTap});
 
   @override
@@ -115,6 +128,7 @@ class _TwoPanelsState extends State<TwoPanels> {
 
   Widget bothPanels(BuildContext context, BoxConstraints constraints) {
     final theme = Theme.of(context);
+    var panelAnim = getPanelAnimation(constraints);
     return Container(
       child: Stack(
         children: <Widget>[
@@ -186,7 +200,7 @@ class _TwoPanelsState extends State<TwoPanels> {
             ),
           ),
           PositionedTransition(
-            rect: getPanelAnimation(constraints),
+            rect: panelAnim,
             child: Material(
               color: theme.cardColor,
               elevation: 7,
@@ -202,8 +216,37 @@ class _TwoPanelsState extends State<TwoPanels> {
                       // mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         GestureDetector(
-                          onTap: widget.onTap,
-                          onVerticalDragStart: (_) => widget.onTap(),
+                          // onTap: widget.onTap,
+                          // onVerticalDragStart: (_) => widget.onTap(),
+                          onVerticalDragUpdate: (details) {
+                            // print('hello');
+                            widget.controller.value -= details.primaryDelta /
+                                constraints.biggest.height;
+                          },
+                          onVerticalDragEnd: (DragEndDetails details) {
+                            if (widget.controller.isAnimating ||
+                                widget.controller.status ==
+                                    AnimationStatus.completed) return;
+                            final double flingVelocity =
+                                details.velocity.pixelsPerSecond.dy /
+                                    constraints.biggest.height;
+                            print(flingVelocity.abs());
+                            if (flingVelocity.abs() < 1.5) return;
+                            if (flingVelocity < 0.0)
+                              widget.controller.fling(
+                                  velocity: max(
+                                      widget.flingVelocity, -flingVelocity));
+                            else if (flingVelocity > 0.0)
+                              widget.controller.fling(
+                                  velocity: min(
+                                      -widget.flingVelocity, -flingVelocity));
+                            else
+                              widget.controller.fling(
+                                  velocity: widget.controller.value < 0.5
+                                      ? -widget.flingVelocity
+                                      : widget.flingVelocity);
+                          },
+
                           behavior: HitTestBehavior.opaque,
                           child: Container(
                             height: headerHeight,
@@ -345,7 +388,10 @@ class BackdropCard extends StatelessWidget {
               onPressed: () {
                 // print('pressed');
                 BlocProvider.of<BCardBloc>(context).dispatch(LaunchEvent(data));
+
+                // if (!backdropPageKey.currentState.isPanelVisible) {
                 onTap();
+                // }
               },
             ),
           )
