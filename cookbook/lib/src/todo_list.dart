@@ -63,11 +63,11 @@ class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () {
-        var future = Future.delayed(Duration(microseconds: 500));
+        var future = Future.delayed(Duration(milliseconds: 500));
         print(_scrollController.offset);
         _scrollController
             .animateTo(
-          _scrollController.position.maxScrollExtent / 2,
+          _scrollController.position.maxScrollExtent / 3.5,
           duration: Duration(seconds: 1),
           curve: Curves.easeIn,
         )

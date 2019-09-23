@@ -1,7 +1,9 @@
 import 'package:cookbook/src/dynamic_list.dart';
+import 'package:cookbook/src/hero.dart';
 import 'package:cookbook/src/modal_sheet.dart';
 import 'package:cookbook/src/pageswipe.dart';
 import 'package:cookbook/src/signin.dart';
+import 'package:cookbook/src/slivers.dart';
 import 'package:cookbook/src/todo_list.dart';
 import 'package:cookbook/src/waveslider.dart';
 import 'package:flutter/material.dart';
@@ -22,5 +24,7 @@ class BCardData {
     BCardData(title: 'Modal Sheet', content: ModalSheet()),
     BCardData(title: 'Sing In', content: SignIn()),
     BCardData(title: 'Dynamic List', content: DynamicList()),
+    BCardData(title: 'Slivers', content: Slivers()),
+    BCardData(title: 'Hero', content: HeroImage()),
   ];
 }

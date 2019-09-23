@@ -129,23 +129,60 @@ class _TwoPanelsState extends State<TwoPanels> {
             //     ),
             //   ),
             // ),
-            child: GridView.count(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-              // gridDelegate: ,
-              crossAxisCount:
-                  MediaQuery.of(context).orientation == Orientation.portrait
-                      ? 3
-                      : 5,
-              childAspectRatio: 6 / 5,
-              // crossAxisSpacing: 4,
-              // mainAxisSpacing: 4,
-              children: BCardData.list
-                  .map(
-                    (data) => new BackdropCard(
-                        context: context, data: data, onTap: widget.onTap),
-                  )
-                  .toList(),
+            child: CustomScrollView(
+              slivers: [
+                // SliverAppBar(
+                //   centerTitle: true,
+                //   automaticallyImplyLeading: true,
+                //   // title: ,
+                //   // backgroundColor: Colors.black,
+                //   pinned: true,
+                //   expandedHeight: 180,
+
+                //   flexibleSpace: FlexibleSpaceBar(
+                //     centerTitle: true,
+                //     title: Text(
+                //       'Backpanel',
+                //       // style: theme.textTheme.title.copyWith(
+                //       //   color: Colors.white,
+                //       //   fontSize: 14,
+                //       // ),
+                //     ),
+                //   ),
+                // ),
+                SliverGrid.count(
+                  // physics: BouncingScrollPhysics(),
+                  // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+
+                  crossAxisCount:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                          ? 3
+                          : 5,
+                  childAspectRatio: 6 / 5,
+                  // crossAxisSpacing: 4,
+                  // mainAxisSpacing: 4,
+
+                  children: BCardData.list
+                      .map(
+                        (data) => new BackdropCard(
+                            context: context, data: data, onTap: widget.onTap),
+                      )
+                      .toList(),
+                ),
+                // SliverFixedExtentList(
+                //   itemExtent: 80,
+                //   delegate: SliverChildBuilderDelegate((ctx, i) {
+                //     return BCardData.list
+                //         .map(
+                //           (data) => new BackdropCard(
+                //               context: context,
+                //               data: data,
+                //               onTap: widget.onTap),
+                //         )
+                //         .toList()[i];
+                //   }, childCount: BCardData.list.length),
+                // ),
+              ],
             ),
           ),
           PositionedTransition(
