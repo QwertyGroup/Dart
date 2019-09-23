@@ -68,7 +68,7 @@ class _TodoListState extends State<TodoList> {
         _scrollController
             .animateTo(
           _scrollController.position.maxScrollExtent / 3.5,
-          duration: Duration(seconds: 1),
+          duration: Duration(milliseconds: 500),
           curve: Curves.easeIn,
         )
             .then(
@@ -78,7 +78,7 @@ class _TodoListState extends State<TodoList> {
             });
             _scrollController.animateTo(
               _scrollController.position.minScrollExtent,
-              duration: Duration(seconds: 1),
+              duration: Duration(milliseconds: 500),
               curve: Curves.easeOut,
             );
           },
