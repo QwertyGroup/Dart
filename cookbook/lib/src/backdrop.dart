@@ -49,6 +49,7 @@ class _BackdropPageState extends State<BackdropPage>
   bool get isPanelVisible {
     final AnimationStatus status = _controller.status;
     return status == AnimationStatus.completed ||
+        status == AnimationStatus.forward ||
         status == AnimationStatus.forward;
   }
 
@@ -226,7 +227,7 @@ class _TwoPanelsState extends State<TwoPanels> {
                             final double flingVelocity =
                                 details.velocity.pixelsPerSecond.dy /
                                     constraints.biggest.height;
-                            print(flingVelocity.abs());
+                            // print(flingVelocity.abs());
                             if (flingVelocity.abs() < 1.5) return;
                             if (flingVelocity < 0.0)
                               widget.controller.fling(
