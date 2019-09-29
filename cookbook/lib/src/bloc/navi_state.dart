@@ -9,6 +9,8 @@ class NaviState extends Union0Impl<_NaviSelected> {
 
   factory NaviState.selected(String title) =>
       NaviState._(_factory.first(_NaviSelected(title)));
+
+  static List<NaviState> list = [NaviState.selected('HeroImage')];
 }
 
 class _NaviSelected {

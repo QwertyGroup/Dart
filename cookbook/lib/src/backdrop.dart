@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cookbook/src/bloc/bcard_bloc.dart';
+import 'package:cookbook/src/bloc/navi_state.dart';
 import 'package:cookbook/src/cf_identity.dart';
 import 'package:cookbook/src/modal_sheet.dart';
 import 'package:cookbook/src/model/bcard_data.dart';
@@ -173,12 +174,23 @@ class _TwoPanelsState extends State<TwoPanels> {
                   // crossAxisSpacing: 4,
                   // mainAxisSpacing: 4,
 
-                  children: BCardData.list
-                      .map(
-                        (data) => new BackdropCard(
-                            context: context, data: data, onTap: widget.onTap),
-                      )
-                      .toList(),
+                  children: [
+                    ...BCardData.list
+                        .map(
+                          (data) => new BackdropCard(
+                              context: context,
+                              data: data,
+                              onTap: widget.onTap),
+                        )
+                        .toList(),
+                    ...NaviState.list
+                        .map(
+                          (state) => NaviOpenCard(
+                            naviState: state,
+                          ),
+                        )
+                        .toList(),
+                  ],
                 ),
                 // SliverFixedExtentList(
                 //   itemExtent: 80,
@@ -410,3 +422,20 @@ class BackdropCard extends StatelessWidget {
 //   height: 200,
 //   child: FittedBox(
 // fit: BoxFit.cover,
+
+class NaviOpenCard extends StatelessWidget {
+  final NaviState naviState;
+
+  const NaviOpenCard({
+    Key key,
+    @required this.naviState,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      child: Text(naviState.toString()),
+    );
+  }
+}
